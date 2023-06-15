@@ -5,13 +5,14 @@ const bcrypt = require('bcrypt');
 const Task = require('./models/task');
 const dotenv = require("dotenv");
 dotenv.config();
+const path = require('path');
 const User = require('./models/User.js');
 const app = express();
-
 
 app.use(cors());
 // app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 const db = process.env.MONGODB_URI;
 
@@ -36,6 +37,9 @@ try {
 
 const port = process.env.PORT || 5500;
 
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 
 app.get('/', (req, res) => {
     res.send('Hello World!!!');
@@ -182,6 +186,7 @@ app.delete('/api/v1/deletetask/:userId', async (req, res) => {
         res.status(500).send({ message: "Internal Server error" });
     }
 });
+
 
 
 app.listen(port, () =>
