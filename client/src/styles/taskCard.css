@@ -1,0 +1,93 @@
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.task-card {
+    width: 70%;
+    height: 150px;
+    border-radius: 12px !important;
+    background-color: #2b2b2b !important;
+    padding: 10px;
+    margin: 0 15%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+.task-name {
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+    align-self: flex-start;
+    margin-bottom: 1em;
+}
+
+.task-details {
+    display: flex;
+}
+
+.task-description {
+    color: white;
+    flex-grow: 1;
+    margin-right: 10px;
+    display: flex;
+    align-self: flex-start;
+}
+
+.task-actions {
+    display: flex;
+    margin-top: 10px;
+}
+
+.task-actions button {
+    margin-right: 5px;
+}
+
+.task-date {
+    color: white;
+    position: absolute;
+    align-self: flex-start;
+    font-size: 0.7em;
+    margin-left: 5px;
+    margin-right: auto;
+    bottom: 0;
+    margin-bottom: 5px;
+}
+
+.task-status{
+    position: absolute;
+    align-self: flex-end;
+    font-size: 0.8em;
+    margin-left: auto;
+    margin-right: 10px;
+    color: white;
+    margin-bottom: 5px;
+    bottom: 0;
+}
+
+.add-button {
+    position: fixed;
+    bottom: 25px;
+    right: 30px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: black !important;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px !important;
+  }
+  
+
+  
+@media (max-width: 768px) {
+    .task-card {
+        width: 90%;
+        margin: 0 5%;
+        margin-top: 1rem;
+    }
+}

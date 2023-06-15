@@ -1,0 +1,41 @@
+.title {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+    padding-left: 2rem;
+}
+
+.navbar-custom {
+    width: 100%;
+    justify-content: center;
+}
+
+.welcome-text {
+    margin-left: auto;
+    font-size: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin-right: 1rem;
+  }
+  
+  
+
+
+@media (max-width: 768px) {
+    .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 25px;
+        font-weight: bold;
+        padding-left: 2rem;
+    }
+
+    .welcome-text {
+        font-size: 15px;
+    }
+}
