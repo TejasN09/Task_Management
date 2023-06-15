@@ -33,7 +33,7 @@ const TaskList = () => {
 
     const fetchTasks = async (userId) => {
         try {
-            const response = await fetch(`http://localhost:5500/tasks?userId=${encodeURIComponent(userId)}`);
+            const response = await fetch(`/api/v1/tasks?userId=${encodeURIComponent(userId)}`);
             const data = await response.json();
             const updatedTasks = data.map(task => ({ ...task, id: task.id }));
             setTasks(updatedTasks);
@@ -54,7 +54,7 @@ const TaskList = () => {
 
         try {
             // Make a PUT request to update the task
-            const response = await fetch(`http://localhost:5500/edittask/${task._id}`, {
+            const response = await fetch(`/api/v1/edittask/${task._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ const TaskList = () => {
     const handleDelete = async (task) => {
         try {
             // Make a DELETE request to delete the task
-            const response = await fetch(`http://localhost:5500/deletetask/${task._id}`, {
+            const response = await fetch(`/api/v1/deletetask/${task._id}`, {
                 method: 'DELETE',
             });
 
@@ -105,7 +105,7 @@ const TaskList = () => {
             console.log('Updating task:', task);
             console.log('Updated task:', updatedTask);
 
-            const response = await fetch(`http://localhost:5500/edittask/${task._id}`, {
+            const response = await fetch(`/api/v1/edittask/${task._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -129,7 +129,7 @@ const TaskList = () => {
         // Handle form submission logic here
         // Retrieve form input values from formData and perform necessary actions
         try {
-            const response = await fetch(`http://localhost:5500/tasks/${task.userId}`, {
+            const response = await fetch(`/api/v1/tasks/${task.userId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
