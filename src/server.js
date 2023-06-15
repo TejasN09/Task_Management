@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
     res.send('Hello World!!!');
 });
 
-app.post('/login', async (req, res) => {
+app.post('/api/v1/login', async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     //find the user with the username in db
@@ -63,7 +63,7 @@ app.post('/login', async (req, res) => {
 
 });
 
-app.post('/register', async (req, res) => {
+app.post('/api/v1/register', async (req, res) => {
     //getting new user data from frontend
     try {
 
@@ -84,7 +84,7 @@ app.post('/register', async (req, res) => {
 
 });
 
-app.get('/users/name', async (req, res) => {
+app.get('/api/v1/users/name', async (req, res) => {
     const email = req.query.email;
     try {
         const user = await User.findOne({ email: email });
@@ -102,7 +102,7 @@ app.get('/users/name', async (req, res) => {
     }
 });
 
-app.get('/tasks', async (req, res) => {
+app.get('/api/v1/tasks', async (req, res) => {
     try {
         const { userId } = req.query;
 
@@ -124,7 +124,7 @@ app.get('/tasks', async (req, res) => {
     }
 });
 
-app.post('/tasks/:userId', async (req, res) => {
+app.post('/api/v1/tasks/:userId', async (req, res) => {
     try {
         const userId = req.params.userId;
         const taskData = new Task({
@@ -145,7 +145,7 @@ app.post('/tasks/:userId', async (req, res) => {
     }
 });
 
-app.put('/edittask/:userId', async (req, res) => {
+app.put('/api/v1/edittask/:userId', async (req, res) => {
     try {
         const userId = req.params.userId;
 
@@ -171,7 +171,7 @@ app.put('/edittask/:userId', async (req, res) => {
 });
 
 
-app.delete('/deletetask/:userId', async (req, res) => {
+app.delete('/api/v1/deletetask/:userId', async (req, res) => {
     try {
         const userId = req.params.userId;
         const taskData = await Task.findOneAndDelete({ _id: userId });
