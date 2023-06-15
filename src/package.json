@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
     "dev": "node index.js",
     "build": "npm i"
   },
   "engines": {
-    "node": ">=14 <15"
+    "node": ">=14 "
   },
   "author": "",
   "license": "ISC",

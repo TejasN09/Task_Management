@@ -3,10 +3,9 @@ const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const Task = require('./models/task');
+const dotenv = require("dotenv");
+dotenv.config();
 const User = require('./models/User.js');
-require('dotenv').config();
-
-
 const app = express();
 
 
@@ -14,7 +13,7 @@ app.use(cors());
 // app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
-const db = process.env.MONGODB_URL;
+const db = process.env.MONGODB_URI;
 
 // Connection to MongoDB
 mongoose.set("strictQuery", false);
