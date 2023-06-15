@@ -11,7 +11,7 @@ const TaskCard = ({ task, onEdit, onDelete, onComplete, userId }) => {
   const [editedDescription, setEditedDescription] = useState(description);
   const [editedDate, setEditedDate] = useState(date);
   const [editedStatus, setEditedStatus] = useState(status);
-  // const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const [tasks, setTasks] = useState('');
 
   // console.log(userId)
@@ -21,7 +21,7 @@ const TaskCard = ({ task, onEdit, onDelete, onComplete, userId }) => {
 
   const fetchTasks = async (userId) => {
     try {
-      const response = await fetch(`/api/v1/tasks?userId=${encodeURIComponent(userId)}`);
+      const response = await fetch(`http://localhost:5500/tasks?userId=${encodeURIComponent(userId)}`);
       const data = await response.json();
       console.log(data);
       setTasks(data);

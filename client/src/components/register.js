@@ -33,7 +33,7 @@ export default function Registration() {
       setErrorMessage('');
 
       try {
-        const response = await fetch('/api/v1/register', {
+        const response = await fetch('http://localhost:5500/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ export default function Registration() {
         });
 
         if (response.ok) {
-          window.location.href=`/login`
+          window.location.href=`http://localhost:3000/login`
           console.log('Registration successful');
         } else {
           // Registration failed
