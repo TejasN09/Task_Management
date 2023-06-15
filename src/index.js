@@ -4,20 +4,36 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const Task = require('./models/task');
 const User = require('./models/User.js');
+require('dotenv').config();
+
 
 const app = express();
+
 
 app.use(cors());
 // app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
-mongoose
-    .connect("mongodb://0.0.0.0:27017/task-management", {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(() => console.log("connection sucessfull!!"))
-    .catch((err) => console.log(err));
+const db = process.env.MONGODB_URL;
+
+// Connection to MongoDB
+mongoose.set("strictQuery", false);
+try {
+  mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log("Connected to MongoDB"))
+    .catch((error) => console.log("Failed to connect to MongoDB:", error));
+} catch (error) {
+  console.log("Could not connect to MongoDB:", error);
+}
+
+
+// mongoose
+//     .connect("mongodb://0.0.0.0:27017/task-management", {
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true,
+//     })
+//     .then(() => console.log("connection sucessfull!!"))
+//     .catch((err) => console.log(err));
 
 const port = process.env.PORT || 5500;
 
