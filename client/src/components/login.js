@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 import { BASE_URL } from '../services/helper';
-import { LOCAL_URL } from '../services/fhelper';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -35,12 +34,14 @@ export default function Login() {
         const nameResponse = await fetch(`${BASE_URL}/users/name?email=${encodeURIComponent(email)}`);
         const nameData = await nameResponse.json();
         const name = nameData.name;
-        const userId =nameData.userId;
+        const userId = nameData.userId;
 
         const nameQuery = encodeURIComponent(name);
         const userIdQuery = encodeURIComponent(userId);
         console.log(userIdQuery);
-        window.location.href=`${LOCAL_URL}/tasks?name=${nameQuery}&userId=${userIdQuery}`
+        const localUrl = window.location.origin;
+        console.log(localUrl);
+        window.location.href = `${localUrl}/tasks?name=${nameQuery}&userId=${userIdQuery}`
         console.log(name + ' ' + nameQuery);
         console.log('Login successful');
       } else {

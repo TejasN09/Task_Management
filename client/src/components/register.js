@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Col, Button, Row, Container, Card, Form, Alert } from 'react-bootstrap';
 import { BASE_URL } from '../services/helper';
-import { LOCAL_URL } from '../services/fhelper';
+// import { LOCAL_URL } from '../services/fhelper';
 
 export default function Registration() {
   const [name, setName] = useState('');
@@ -48,7 +48,9 @@ export default function Registration() {
         });
 
         if (response.ok) {
-          window.location.href=`${LOCAL_URL}/login`
+          const localUrl = window.location.origin;
+          console.log(localUrl);
+          window.location.href = `${localUrl}/login`;
           console.log('Registration successful');
         } else {
           // Registration failed
