@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Button, Form } from 'react-bootstrap';
 import { BsPencil, BsTrash, BsCheck } from 'react-icons/bs';
 import '../styles/taskCard.css';
+import { BASE_URL } from '../services/helper';
 
 const TaskCard = ({ task, onEdit, onDelete, onComplete, userId }) => {
   const { name, description, date } = task;
@@ -21,7 +22,7 @@ const TaskCard = ({ task, onEdit, onDelete, onComplete, userId }) => {
 
   const fetchTasks = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:5500/tasks?userId=${encodeURIComponent(userId)}`);
+      const response = await fetch(`${BASE_URL}/tasks?userId=${encodeURIComponent(userId)}`);
       const data = await response.json();
       console.log(data);
       setTasks(data);

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
+import { BASE_URL } from '../services/helper';
+import { LOCAL_URL } from '../services/fhelper';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -18,7 +20,7 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5500/login', {
+      const response = await fetch(`${BASE_URL}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,7 +32,7 @@ export default function Login() {
       });
 
       if (response.ok) {
-        const nameResponse = await fetch(`http://localhost:5500/users/name?email=${encodeURIComponent(email)}`);
+        const nameResponse = await fetch(`${BASE_URL}/users/name?email=${encodeURIComponent(email)}`);
         const nameData = await nameResponse.json();
         const name = nameData.name;
         const userId =nameData.userId;
@@ -38,7 +40,7 @@ export default function Login() {
         const nameQuery = encodeURIComponent(name);
         const userIdQuery = encodeURIComponent(userId);
         console.log(userIdQuery);
-        window.location.href=`http://localhost:3000/tasks?name=${nameQuery}&userId=${userIdQuery}`
+        window.location.href=`${LOCAL_URL}/tasks?name=${nameQuery}&userId=${userIdQuery}`
         console.log(name + ' ' + nameQuery);
         console.log('Login successful');
       } else {

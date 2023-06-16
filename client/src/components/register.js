@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Col, Button, Row, Container, Card, Form, Alert } from 'react-bootstrap';
+import { BASE_URL } from '../services/helper';
+import { LOCAL_URL } from '../services/fhelper';
 
 export default function Registration() {
   const [name, setName] = useState('');
@@ -33,7 +35,7 @@ export default function Registration() {
       setErrorMessage('');
 
       try {
-        const response = await fetch('http://localhost:5500/register', {
+        const response = await fetch(`${BASE_URL}/register`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -46,7 +48,7 @@ export default function Registration() {
         });
 
         if (response.ok) {
-          window.location.href=`http://localhost:3000/login`
+          window.location.href=`${LOCAL_URL}/login`
           console.log('Registration successful');
         } else {
           // Registration failed

@@ -149,7 +149,7 @@ app.post('/tasks/:userId', async (req, res) => {
     }
 });
 
-app.put('/edittask/:userId', async (req, res) => {
+app.put('/edit-task/:userId', async (req, res) => {
     try {
         const userId = req.params.userId;
 
@@ -174,11 +174,11 @@ app.put('/edittask/:userId', async (req, res) => {
     }
 });
 
-
-app.delete('deletetask/:userId', async (req, res) => {
+app.delete('/delete-task/:userId', async (req, res) => {
     try {
         const userId = req.params.userId;
         const taskData = await Task.findOneAndDelete({ _id: userId });
+        console.log(userId)
         res.status(200).send(taskData);
         console.log("deleted");
     } catch (err) {
@@ -186,7 +186,6 @@ app.delete('deletetask/:userId', async (req, res) => {
         res.status(500).send({ message: "Internal Server error" });
     }
 });
-
 
 
 app.listen(port, () =>

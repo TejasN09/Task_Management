@@ -7,6 +7,7 @@ import Nav from './navbar';
 import '../styles/taskCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTasks } from '@fortawesome/free-solid-svg-icons';
+import { BASE_URL } from '../services/helper';
 
 const styles = {
     backgroundColor: '#cccccc',
@@ -33,7 +34,7 @@ const TaskList = () => {
 
     const fetchTasks = async (userId) => {
         try {
-            const response = await fetch(`http://localhost:5500/tasks?userId=${encodeURIComponent(userId)}`);
+            const response = await fetch(`${BASE_URL}/tasks?userId=${encodeURIComponent(userId)}`);
             const data = await response.json();
             const updatedTasks = data.map(task => ({ ...task, id: task.id }));
             setTasks(updatedTasks);
@@ -45,6 +46,7 @@ const TaskList = () => {
 
 
     const handleEdit = async (task) => {
+        const taskId = task._id;
         const updatedTask = {
             name: task.name,
             description: task.description,
@@ -54,7 +56,7 @@ const TaskList = () => {
 
         try {
             // Make a PUT request to update the task
-            const response = await fetch(`http://localhost:5500/edittask/${task._id}`, {
+            const response = await fetch(`${BASE_URL}/edit-task/${taskId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -63,12 +65,14 @@ const TaskList = () => {
             });
 
             if (response.ok) {
-                const updatedTasks = tasks.map((t) => (t._id === task._id ? updatedTask : t));
+                const updatedTasks = tasks.map((t) => (t._id === taskId ? updatedTask : t));
                 setTasks(updatedTasks);
                 console.log('Task updated:', updatedTask);
+                window.location.reload();
             } else {
                 console.log('Failed to update task');
             }
+
         } catch (err) {
             console.log(err);
         }
@@ -78,10 +82,11 @@ const TaskList = () => {
     const handleDelete = async (task) => {
         try {
             // Make a DELETE request to delete the task
-            const response = await fetch(`http://localhost:5500/deletetask/${task._id}`, {
+            const response = await fetch(`${BASE_URL}/delete-task/${task._id}`, {
                 method: 'DELETE',
             });
 
+            console.log(response);
             if (response.ok) {
                 // Remove the task from the tasks array
                 const updatedTasks = tasks.filter((t) => t._id !== task._id);
@@ -105,7 +110,7 @@ const TaskList = () => {
             console.log('Updating task:', task);
             console.log('Updated task:', updatedTask);
 
-            const response = await fetch(`http://localhost:5500/edittask/${task._id}`, {
+            const response = await fetch(`${BASE_URL}/edit-task/${task._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -129,7 +134,7 @@ const TaskList = () => {
         // Handle form submission logic here
         // Retrieve form input values from formData and perform necessary actions
         try {
-            const response = await fetch(`http://localhost:5500/tasks/${task.userId}`, {
+            const response = await fetch(`${BASE_URL}/tasks/${task.userId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -175,9 +180,9 @@ const TaskList = () => {
                         <Button className="add-button rounded-circle" onClick={handleAdd}>+</Button>
                     </>
                 ) : (
-                tasks.map((task) => (
+                tasks.map((task,index) => (
                     <TaskCard
-                        key={task._id}
+                        key={`${task._id}-${index}`}
                         task={task}
                         onEdit={handleEdit}
                         onDelete={handleDelete}
