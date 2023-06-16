@@ -6,7 +6,7 @@ const Task = require('./models/task');
 const dotenv = require("dotenv");
 dotenv.config();
 const path = require('path');
-const User = require('./models/User.js');
+const User = require('./models/user.js');
 const app = express();
 
 app.use(cors());
