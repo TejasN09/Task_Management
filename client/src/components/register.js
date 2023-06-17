@@ -60,7 +60,6 @@ export default function Registration() {
         }
       } catch (error) {
         console.log(error);
-        navigate('/login');
         setErrorMessage('Internal Server Error');
       }
     } else {
