@@ -58,7 +58,8 @@ app.post('/login', async (req, res) => {
                 .send({ message: "Invalid Username or Password. Try Again!" });
         } else {
             console.log(user);
-            res.status(200).send(user);
+            // res.status(200).send(user);
+            res.redirect('/tasks');
         }
     } catch (error) {
         console.log(error);
@@ -79,7 +80,8 @@ app.post('/register', async (req, res) => {
 
         await userData.save();
 
-        res.status(200).send(userData);
+        res.redirect('/login');
+        // res.status(200).send(userData);
         console.log("done");
     } catch (err) {
         console.log(err);

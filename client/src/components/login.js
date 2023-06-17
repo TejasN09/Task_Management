@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../services/helper';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -39,9 +41,11 @@ export default function Login() {
         const nameQuery = encodeURIComponent(name);
         const userIdQuery = encodeURIComponent(userId);
         console.log(userIdQuery);
-        const localUrl = window.location.origin;
-        console.log(localUrl);
-        window.location.href = `${localUrl}/tasks?name=${nameQuery}&userId=${userIdQuery}`
+        // const localUrl = window.location.origin;
+        // console.log(localUrl);
+        // window.location.href = `${localUrl}/tasks?name=${nameQuery}&userId=${userIdQuery}`
+        const tasksUrl = `/tasks?name=${nameQuery}&userId=${userIdQuery}`;
+        navigate(tasksUrl);
         console.log(name + ' ' + nameQuery);
         console.log('Login successful');
       } else {
