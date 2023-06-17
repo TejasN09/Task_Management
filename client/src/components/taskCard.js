@@ -69,7 +69,7 @@ const TaskCard = ({ task, onEdit, onDelete, onComplete, userId }) => {
         ) : (
           <div className="task-name">{name}</div>
         )}
-        <div className="task-details">
+        <div className="task-details" style={{marginBottom:"15px"}}>
           {editMode ? (
             <Form.Control
               style={{ backgroundColor: '#2b2b2b', color: 'white' }}

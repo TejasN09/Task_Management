@@ -16,7 +16,9 @@ const user = new mongoose.Schema({
   },
   userId: {
     type: String,
-    default: uuidv4()
+    default: uuidv4(),
+    required: true,
+    unique: true
   },
 
 });
