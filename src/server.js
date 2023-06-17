@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const Task = require('./models/task');
 const dotenv = require("dotenv");
 dotenv.config();
+const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const User = require('./models/user.js');
 const app = express();
@@ -76,6 +77,7 @@ app.post('/register', async (req, res) => {
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
+            userId:uuidv4()
         });
 
         await userData.save();
